@@ -45,8 +45,10 @@
             this.bttImportacionServcio = new System.Windows.Forms.Button();
             this.bttExportarTickets = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // bttCrearTicket
@@ -97,9 +99,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.bttClietne);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(26, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 100);
+            this.groupBox1.Size = new System.Drawing.Size(197, 100);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
@@ -117,9 +119,9 @@
             this.groupBox2.Controls.Add(this.listBox1);
             this.groupBox2.Controls.Add(this.bttEliminarServicio);
             this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Location = new System.Drawing.Point(229, 12);
+            this.groupBox2.Location = new System.Drawing.Point(232, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(395, 426);
+            this.groupBox2.Size = new System.Drawing.Size(392, 426);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
@@ -187,9 +189,9 @@
             // 
             // bttImportacionServcio
             // 
-            this.bttImportacionServcio.Location = new System.Drawing.Point(44, 131);
+            this.bttImportacionServcio.Location = new System.Drawing.Point(6, 20);
             this.bttImportacionServcio.Name = "bttImportacionServcio";
-            this.bttImportacionServcio.Size = new System.Drawing.Size(129, 52);
+            this.bttImportacionServcio.Size = new System.Drawing.Size(146, 52);
             this.bttImportacionServcio.TabIndex = 8;
             this.bttImportacionServcio.Text = "Importacion Servicios";
             this.bttImportacionServcio.UseVisualStyleBackColor = true;
@@ -197,21 +199,31 @@
             // 
             // bttExportarTickets
             // 
-            this.bttExportarTickets.Location = new System.Drawing.Point(44, 189);
+            this.bttExportarTickets.Location = new System.Drawing.Point(6, 78);
             this.bttExportarTickets.Name = "bttExportarTickets";
-            this.bttExportarTickets.Size = new System.Drawing.Size(129, 52);
+            this.bttExportarTickets.Size = new System.Drawing.Size(146, 52);
             this.bttExportarTickets.TabIndex = 9;
             this.bttExportarTickets.Text = "Exportar Tickets";
             this.bttExportarTickets.UseVisualStyleBackColor = true;
             this.bttExportarTickets.Click += new System.EventHandler(this.bttExportarTickets_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.bttImportacionServcio);
+            this.groupBox3.Controls.Add(this.bttExportarTickets);
+            this.groupBox3.Location = new System.Drawing.Point(633, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(155, 192);
+            this.groupBox3.TabIndex = 10;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "groupBox3";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.bttExportarTickets);
-            this.Controls.Add(this.bttImportacionServcio);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
@@ -221,6 +233,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -243,6 +256,7 @@
         private System.Windows.Forms.Button bttImportacionServcio;
         private System.Windows.Forms.Button bttExportarTickets;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
 
