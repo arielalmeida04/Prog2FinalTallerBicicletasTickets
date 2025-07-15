@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,7 +18,7 @@ namespace Prog2FinalTallerBicicletasTickets
         Stack<Ticket> listatickets = new Stack<Ticket>();
         List<Servicio> listaServicios = new List<Servicio>();
         Ticket tiki;
-       
+
 
         public Form1()
         {
@@ -31,7 +32,7 @@ namespace Prog2FinalTallerBicicletasTickets
 
             foreach (Servicio item in listaServicios)
             {
-                listBox1.Items.Add(item); // Servicio sv = listbox1.selecteditem as  Servicio
+                listBox1.Items.Add(item);
             }
         }
 
@@ -45,10 +46,10 @@ namespace Prog2FinalTallerBicicletasTickets
                 if (File.Exists("datos.dat"))
                 {
                     fs = new FileStream("datos.dat", FileMode.Open, FileAccess.Read);
-                   listatickets = (Stack<Ticket>) bf.Deserialize(fs);
+                    listatickets = (Stack<Ticket>)bf.Deserialize(fs);
                 }
-            
-                
+
+
 
             }
             catch (Exception ex)
@@ -58,8 +59,8 @@ namespace Prog2FinalTallerBicicletasTickets
             }
             finally
             {
-                
-                if(fs!= null) fs.Close();
+
+                if (fs != null) fs.Close();
             }
         }
 
@@ -91,12 +92,12 @@ namespace Prog2FinalTallerBicicletasTickets
                     tiki = new Ticket(cuit, nombre);
                     MessageBox.Show("Se agrego correctamente");
                 }
-               
+
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show("Error: "+ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
@@ -117,7 +118,7 @@ namespace Prog2FinalTallerBicicletasTickets
                     MessageBox.Show("Se agrego el servicio R");
 
                 }
-               else if(sv is Mantenimiento m)
+                else if (sv is Mantenimiento m)
                 {
                     if (rbFeriado.Checked)
                     {
@@ -126,7 +127,7 @@ namespace Prog2FinalTallerBicicletasTickets
                         tiki.AgregarServicio(sv);
                         MessageBox.Show("Se agrego el servicio M");
                     }
-                  
+
                 }
             }
             catch (Exception)
@@ -154,13 +155,13 @@ namespace Prog2FinalTallerBicicletasTickets
             catch (Exception ex)
             {
 
-                MessageBox.Show("error "+ex.Message);
+                MessageBox.Show("error " + ex.Message);
             }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FileStream fs = new FileStream("datos.dat",FileMode.Create,FileAccess.Write);
+            FileStream fs = new FileStream("datos.dat", FileMode.Create, FileAccess.Write);
             BinaryFormatter bf = new BinaryFormatter();
             try
             {
@@ -175,32 +176,89 @@ namespace Prog2FinalTallerBicicletasTickets
             {
                 if (fs != null) fs.Close();
             }
-        
+
         }
 
         private void bttImportacionServcio_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            //ofd.Filter = "Archivos CSV (.csv)|.csv|Todos los archivos (.)|.";
-            //ofd.Title = "Importar productos";
+
+            FileStream fs = new FileStream("archivo.csv", FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs);
+            listBox1.Items.Clear();
             try
             {
-                string ruta = ofd.FileName;
-                if (ofd.ShowDialog()==DialogResult.OK)
+
+                while (!sr.EndOfStream)
                 {
-                    ImportarServicios im = new ImportarServicios(listaServicios);
-                    im.CargarArchivo(ruta);
-                    listBox1.Items.Clear();
-                    foreach (Servicio item in listaServicios)
+                    string linea = sr.ReadLine();
+                    string[] campos = linea.Split(';');
+
+                    string servicio = campos[0];
+
+                    if (servicio == "R")
                     {
-                        listBox1.Items.Add(item);
+                        int cod = int.Parse(campos[1]);
+                        string descripcion = campos[2];
+                        double precioB = double.Parse(campos[3]);
+                        double precioR = double.Parse(campos[4]);
+                        Servicio r = new Reparacion(cod, descripcion, precioB, precioR);
+                        listaServicios.Add(r);
                     }
+
+                    else if (servicio == "M")
+                    {
+                        int codigo = int.Parse(campos[1]);
+                        string descipcion = campos[2];
+                        double precioB = Double.Parse(campos[3]);
+                        Servicio m = new Mantenimiento(codigo, descipcion, precioB);
+                        listaServicios.Add(m);
+                    }
+
+
                 }
+
+
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show("error "+ex.Message);
+                MessageBox.Show("error " + ex.Message);
+            }
+            finally
+            {
+                sr.Close();
+                fs.Close();
+            }
+
+        }
+
+        private void bttExportarTickets_Click(object sender, EventArgs e)
+        {
+            FileStream fs = new FileStream("listatickets.csv", FileMode.CreateNew, FileAccess.Write);
+
+            StreamWriter sw = new StreamWriter(fs);
+
+            try
+            {
+               
+
+                    foreach (Ticket item in listatickets)
+                    {
+                        sw.WriteLine(item.ToString());
+                    }
+                
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("error " + ex.Message);
+            }
+
+            finally
+            {
+
+                sw.Close();
+                fs.Close();
             }
         }
     }

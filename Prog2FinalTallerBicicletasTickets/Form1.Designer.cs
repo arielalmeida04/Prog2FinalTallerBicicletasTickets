@@ -44,6 +44,7 @@
             this.bttAgregarServicio = new System.Windows.Forms.Button();
             this.bttImportacionServcio = new System.Windows.Forms.Button();
             this.bttExportarTickets = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -202,6 +203,7 @@
             this.bttExportarTickets.TabIndex = 9;
             this.bttExportarTickets.Text = "Exportar Tickets";
             this.bttExportarTickets.UseVisualStyleBackColor = true;
+            this.bttExportarTickets.Click += new System.EventHandler(this.bttExportarTickets_Click);
             // 
             // Form1
             // 
@@ -240,6 +242,7 @@
         private System.Windows.Forms.ListBox lbTickets;
         private System.Windows.Forms.Button bttImportacionServcio;
         private System.Windows.Forms.Button bttExportarTickets;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

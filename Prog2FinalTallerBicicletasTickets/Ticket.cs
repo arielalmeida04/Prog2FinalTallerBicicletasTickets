@@ -59,7 +59,7 @@ namespace Prog2FinalTallerBicicletasTickets
 
         public override string ToString()
         {
-            return NroOrden + " " + unCliente.ToString() + " " +FechaHora + " " +PrecioFinal();
+            return NroOrden + ";" + unCliente.ToString() + ";" +FechaHora + ";" +PrecioFinal();
         }
     
         
