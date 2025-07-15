@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Prog2FinalTallerBicicletasTickets
 {
+    [Serializable]
     internal class Reparacion : Servicio
     {
         public double PrecioRepuesto {  get; set; }

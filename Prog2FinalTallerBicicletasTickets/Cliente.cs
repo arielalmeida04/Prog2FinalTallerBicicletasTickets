@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Prog2FinalTallerBicicletasTickets
 {
+    [Serializable]
     internal class Cliente
     {
         long cuit { get; set; }

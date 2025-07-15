@@ -59,6 +59,8 @@
     <Compile Include="GenerarTicket.Designer.cs">
       <DependentUpon>GenerarTicket.cs</DependentUpon>
     </Compile>
+    <Compile Include="Iimportable.cs" />
+    <Compile Include="ImportarServicios.cs" />
     <Compile Include="Mantenimiento.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

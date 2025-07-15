@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,7 +37,30 @@ namespace Prog2FinalTallerBicicletasTickets
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream fs = null;
 
+            try
+            {
+                if (File.Exists("datos.dat"))
+                {
+                    fs = new FileStream("datos.dat", FileMode.Open, FileAccess.Read);
+                   listatickets = (Stack<Ticket>) bf.Deserialize(fs);
+                }
+            
+                
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error" + ex.Message);
+            }
+            finally
+            {
+                
+                if(fs!= null) fs.Close();
+            }
         }
 
         private void bttCrearTicket_Click(object sender, EventArgs e)
@@ -124,6 +149,52 @@ namespace Prog2FinalTallerBicicletasTickets
                 else
                 {
                     MessageBox.Show("Servicio no encontrado");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("error "+ex.Message);
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            FileStream fs = new FileStream("datos.dat",FileMode.Create,FileAccess.Write);
+            BinaryFormatter bf = new BinaryFormatter();
+            try
+            {
+                bf.Serialize(fs, listatickets);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error " + ex.Message);
+            }
+            finally
+            {
+                if (fs != null) fs.Close();
+            }
+        
+        }
+
+        private void bttImportacionServcio_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            //ofd.Filter = "Archivos CSV (.csv)|.csv|Todos los archivos (.)|.";
+            //ofd.Title = "Importar productos";
+            try
+            {
+                string ruta = ofd.FileName;
+                if (ofd.ShowDialog()==DialogResult.OK)
+                {
+                    ImportarServicios im = new ImportarServicios(listaServicios);
+                    im.CargarArchivo(ruta);
+                    listBox1.Items.Clear();
+                    foreach (Servicio item in listaServicios)
+                    {
+                        listBox1.Items.Add(item);
+                    }
                 }
             }
             catch (Exception ex)

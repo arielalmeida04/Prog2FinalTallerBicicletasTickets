@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Prog2FinalTallerBicicletasTickets
 {
+    [Serializable]
     internal abstract class Servicio:IComparable<Servicio>
     {
         public int NroCod {  get; set; }

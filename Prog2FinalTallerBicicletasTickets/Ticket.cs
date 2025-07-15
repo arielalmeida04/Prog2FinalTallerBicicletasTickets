@@ -8,6 +8,7 @@ using System.Xml.Schema;
 
 namespace Prog2FinalTallerBicicletasTickets
 {
+    [Serializable]
     internal class Ticket
     {
         Cliente unCliente;
@@ -60,6 +61,8 @@ namespace Prog2FinalTallerBicicletasTickets
         {
             return NroOrden + " " + unCliente.ToString() + " " +FechaHora + " " +PrecioFinal();
         }
+    
+        
     
     }
 }

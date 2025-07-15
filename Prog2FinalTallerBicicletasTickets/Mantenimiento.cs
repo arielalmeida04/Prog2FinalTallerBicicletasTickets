@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Prog2FinalTallerBicicletasTickets
 {
+    [Serializable]
     internal class Mantenimiento : Servicio
     {
         double extra;
